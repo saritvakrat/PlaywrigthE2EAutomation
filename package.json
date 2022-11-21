@@ -1,0 +1,17 @@
+{
+  "name": "honeybook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "report": "npx playwright show-report",
+    "tests-headed": "npx playwright test landing-page.spec.ts --headed",
+    "tests" : "npx playwright test"
+  },
+  "keywords": [],
+  "author": "Sarit Vakrat",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.28.0"
+  }
+}
