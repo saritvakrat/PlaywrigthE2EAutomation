@@ -26,4 +26,4 @@ We are using BasePage class, it will contain all of the service in order to pres
 # Improvements
 1. Linter
 2. Docker
-3. 
+3. EXTRACT TO WORKFLOWS

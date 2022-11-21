@@ -20,9 +20,9 @@ test.describe('User Sign Up - Happy flows:', () => {
       //Prepare
       const signUpPage = new SignUpPage(page);
       //Test
-      signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
+      await signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
       // Assert
-      await expect(signUpPage.userIsLoggedIn).toBeTruthy();
+      await expect(signUpPage.userIsLoggedIn()).toBeTruthy();
     });
 
     test('should verify user can sign up with Google', async ({ page }) => {
@@ -32,9 +32,9 @@ test.describe('User Sign Up - Happy flows:', () => {
       await expect(signUpPage.googleButtonLocator).toBeEnabled();
       
       //Test
-      signUpPage.signUpWithGoogle();
+      await signUpPage.signUpWithGoogle();
       // Assert
-      await expect(signUpPage.userIsLoggedIn).toBeTruthy();
+      await expect(signUpPage.userIsLoggedIn()).toBeTruthy();
     });
 
     test('should verify user can sign up with Facebook', async ({ page }) => {
@@ -44,10 +44,10 @@ test.describe('User Sign Up - Happy flows:', () => {
       await expect(signUpPage.facebookButtonLocator).toBeEnabled();
       
       //Test
-      signUpPage.signUpWithGoogle();
+      await signUpPage.signUpWithGoogle();
 
       // Assert
-      await expect(signUpPage.userIsLoggedIn).toBeTruthy();
+      await expect(signUpPage.userIsLoggedIn()).toBeTruthy();
     });
 
     test('should verify user can sign up with apple', async ({ page }) => {
@@ -57,10 +57,10 @@ test.describe('User Sign Up - Happy flows:', () => {
       await expect(signUpPage.appleButtonLocator).toBeEnabled();
       
       //Test
-      signUpPage.signUpWithApple();
+      await signUpPage.signUpWithApple();
 
       // Assert
-      await expect(signUpPage.userIsLoggedIn).toBeTruthy();
+      await expect(signUpPage.userIsLoggedIn()).toBeTruthy();
     });
 
 });
@@ -72,22 +72,22 @@ test.describe('User Sign Up - Negative flows:', () => {
        const signUpPage = new SignUpPage(page);
        let email = signUpUserData.email;
        //Test
-       signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
+       await signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
        
        await signUpPage.goToSignUpPage();
        signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
        // Assert
-       await expect(signUpPage.userIsLoggedIn).toBeFalsy();
+       await expect(signUpPage.userIsLoggedIn()).toBeFalsy();
   });
 
   test('should verify user under 16 cant sign up', async ({ page }) => {
     //Prepare
     const signUpPage = new SignUpPage(page);
     //Test
-    signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, "04",  "05",  "2019");
+    await signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, '4',  '5',  '2019');
     
     // Assert
-    await expect(signUpPage.userIsLoggedIn).toBeFalsy();
+    await expect(signUpPage.userIsLoggedIn()).toBeFalsy();
   });
 
   test('should verify mandatory fields validations', async ({ page }) => {
@@ -95,7 +95,7 @@ test.describe('User Sign Up - Negative flows:', () => {
     const signUpPage = new SignUpPage(page);
     // Assert
     await expect(signUpPage.errorValidations).toBeTruthy();
-    await expect(signUpPage.userIsLoggedIn).toBeFalsy();
+    await expect(signUpPage.userIsLoggedIn()).toBeFalsy();
   });
 
 });
