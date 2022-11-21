@@ -54,7 +54,25 @@ async signUpWithEmail(email: string, firstName: string, lastName: string, passwo
   //TODO: Extract Contact Preferences to an enum
   await this.page.locator('label').filter({ hasText: 'New stuff' }).locator('span').click();
   await this.page.locator('label').filter({ hasText: 'ASOS partners' }).locator('span').click();
+  this.clickSignUpButton();
+}
+
+async clickSignUpButton() {
   await this.page.getByRole('button', { name: 'Join ASOS' }).click();
+}
+
+async errorValidations () {
+  await this.page.getByLabel('Email address').click();
+  await expect(this.page.getByText('Oops! You need to type your email here')).toHaveText('Oops! You need to type your email here');
+
+  await this.page.getByLabel('First name').click();
+  await this.page.getByText('We need your first name – it’s nicer that way').click();
+
+  await this.page.getByLabel('Last name').click();
+  await expect(this.page.getByText('Last name, too, please!')).toHaveText('Last name, too, please!');
+
+  await this.page.getByLabel('Password').click();
+  await expect(this.page.getByText('Hey, we need a password here')).toHaveText('Hey, we need a password here');
 }
 
 async signUpWithGoogle(){

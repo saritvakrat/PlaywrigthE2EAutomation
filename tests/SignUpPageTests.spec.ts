@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { SignUpPage } from '../Infra/Pages/SignUpPage.spec';
 import { signUpUserData } from '../Infra/testsData';
-import { ElementsHelper as elementHelper } from '../Infra/Utils/ElementsHelpers.spec';
 
 //TODO: Add parallel support
 test.beforeEach(async ({ page }) => {
@@ -68,8 +67,35 @@ test.describe('User Sign Up - Happy flows:', () => {
 
 test.describe('User Sign Up - Negative flows:', () => {
   
-  test('should verify user cant sign up email with inv', async ({ page }) => {
- 
+  test('should verify user cant sign up with the same email address', async ({ page }) => {
+       //Prepare
+       const signUpPage = new SignUpPage(page);
+       let email = signUpUserData.email;
+       //Test
+       signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
+       
+       await signUpPage.goToSignUpPage();
+       signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
+       // Assert
+       await expect(signUpPage.userIsLoggedIn).toBeFalsy();
+  });
+
+  test('should verify user under 16 cant sign up', async ({ page }) => {
+    //Prepare
+    const signUpPage = new SignUpPage(page);
+    //Test
+    signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, "04",  "05",  "2019");
+    
+    // Assert
+    await expect(signUpPage.userIsLoggedIn).toBeFalsy();
+  });
+
+  test('should verify mandatory fields validations', async ({ page }) => {
+    //Prepare
+    const signUpPage = new SignUpPage(page);
+    // Assert
+    await expect(signUpPage.errorValidations).toBeTruthy();
+    await expect(signUpPage.userIsLoggedIn).toBeFalsy();
   });
 
 });
