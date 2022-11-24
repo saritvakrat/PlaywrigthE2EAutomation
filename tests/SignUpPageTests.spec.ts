@@ -1,12 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { SignUpPage } from '../src/Pages/SignUpPage.spec';
 import { signUpUserData } from '../src/testsData';
-import { BasePage } from '../src/Pages/BasePage.spec';
 
 //TODO: Add parallel support
 test.beforeEach(async ({ page }) => {
-  const basePage = new BasePage(page); 
-  basePage.getStarted();
   const signUpPage = new SignUpPage(page);
   await signUpPage.goToSignUpPage();
   await expect(page).toHaveURL(/.*identity/);

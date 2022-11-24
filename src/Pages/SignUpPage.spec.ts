@@ -54,7 +54,7 @@ async signUpWithEmail(email: string, firstName: string, lastName: string, passwo
   //TODO: Extract Contact Preferences to an enum
   await this.page.locator('label').filter({ hasText: 'New stuff' }).locator('span').click();
   await this.page.locator('label').filter({ hasText: 'ASOS partners' }).locator('span').click();
-  this.clickSignUpButton();
+  await this.clickSignUpButton();
 }
 
 async clickSignUpButton() {
