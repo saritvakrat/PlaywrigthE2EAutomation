@@ -1,4 +1,3 @@
-// playwright-dev-page.ts
 import { expect, Locator, Page, Browser, BrowserContext } from '@playwright/test';
 import { SignUpPage } from './SignUpPage.spec';
 
@@ -21,10 +20,6 @@ export class BasePage {
     // Create a new page inside context.
     const page = await this.context.newPage(); 
     await expect(this.asosHeadlineText).toBeVisible();
-  }
-
-  async pageObjectModel() {
-    await this.getStarted();
   }
   
 }
