@@ -8,6 +8,7 @@
     "test:debug" : "playwright test --debug",
     "test:desktop" : "playwright test --project=chromium",
     "test:file" : "playwright test exampleFile",
+    "test:trace": "playwright test --trace on",
     "test:codegen" : "playwright codegen",
     "report": "playwright show-report",
     "test-headed": "playwright test landing-page.spec.ts --headed",
