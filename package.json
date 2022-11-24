@@ -1,12 +1,17 @@
 {
   "name": "playwrightExample",
   "version": "1.0.0",
-  "description": "",
+  "description": "playwright with typescript POM Example",
   "main": "index.js",
   "scripts": {
-    "report": "npx playwright show-report",
-    "tests-headed": "npx playwright test landing-page.spec.ts --headed",
-    "tests" : "npx playwright test"
+    "test" : "playwright test",
+    "test:debug" : "playwright test --debug",
+    "test:desktop" : "playwright test --project=chromium",
+    "test:file" : "playwright test exampleFile",
+    "test:codegen" : "playwright codegen",
+    "report": "playwright show-report",
+    "test-headed": "playwright test landing-page.spec.ts --headed",
+    "show:trace": "playwright show-trace trace.zip"
   },
   "keywords": [],
   "author": "Sarit Vakrat",
