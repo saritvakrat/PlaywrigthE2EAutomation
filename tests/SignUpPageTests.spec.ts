@@ -17,7 +17,6 @@ test.describe('User Sign Up - Happy flows:', () => {
 
     //TODO: Investigate if need new page instance per test
     test('should verify user can sign up with email', async ({ page }) => {
-      //Prepare
       const signUpPage = new SignUpPage(page);
       //Test
       await signUpPage.signUpWithEmail(signUpUserData.email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
@@ -26,10 +25,9 @@ test.describe('User Sign Up - Happy flows:', () => {
     });
 
     test('should verify user can sign up with Google', async ({ page }) => {
-      //Prepare
       const signUpPage = new SignUpPage(page);
       //Verify Google button enabled in the page
-      await expect(signUpPage.googleButtonLocator).toBeEnabled();
+      await expect.soft(signUpPage.googleButtonLocator).toBeEnabled();
       
       //Test
       await signUpPage.signUpWithGoogle();
@@ -38,23 +36,21 @@ test.describe('User Sign Up - Happy flows:', () => {
     });
 
     test('should verify user can sign up with Facebook', async ({ page }) => {
-      //Prepare
       const signUpPage = new SignUpPage(page);
       //Verify Google button enabled in the page
-      await expect(signUpPage.facebookButtonLocator).toBeEnabled();
+      await expect.soft(signUpPage.facebookButtonLocator).toBeEnabled();
       
       //Test
-      await signUpPage.signUpWithGoogle();
+      await signUpPage.signUpWithFacebook();
 
       // Assert
       await expect(signUpPage.userIsLoggedIn()).toBeTruthy();
     });
 
     test('should verify user can sign up with apple', async ({ page }) => {
-      //Prepare
       const signUpPage = new SignUpPage(page);
       //Verify Google button enabled in the page
-      await expect(signUpPage.appleButtonLocator).toBeEnabled();
+      await expect.soft(signUpPage.appleButtonLocator).toBeEnabled();
       
       //Test
       await signUpPage.signUpWithApple();
@@ -68,7 +64,7 @@ test.describe('User Sign Up - Happy flows:', () => {
 test.describe('User Sign Up - Negative flows:', () => {
   
   test('should verify user cant sign up with the same email address', async ({ page }) => {
-       //Prepare
+
        const signUpPage = new SignUpPage(page);
        let email = signUpUserData.email;
        //Test

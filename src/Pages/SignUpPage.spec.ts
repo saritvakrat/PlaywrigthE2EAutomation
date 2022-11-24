@@ -35,11 +35,11 @@ async goToSignUpPage() {
 
 //TODO: Extract to separate assertions
 async userIsLoggedIn() {
-  await expect(this.page).toHaveTitle(/.*my-account/);
   // Expects the URL to contain my account.
   await expect.soft(this.page).toHaveURL(/.*my-account/);
   await expect(this.welcomeToYourAccountLocator).toHaveText(this.welcomeToYourAccountText);
 }
+
 
 async signUpWithEmail(email: string, firstName: string, lastName: string, password: string, dayOfBirth: string, monthOfBirth: string, yearOfBirth: string ) {     
   //TODO: Extract to elements page in constructor 
@@ -78,11 +78,13 @@ async errorValidations () {
 async signUpWithGoogle(){
   await this.googleButtonLocator.click();
   await expect(this.page).toHaveURL(/.*o/);
+  await expect(this.page).toHaveTitle("Sign in - Google Accounts");
 }
 
 async signUpWithApple(){
   await this.appleButtonLocator.click();
   await expect(this.page).toHaveURL(/.*auth/);
+  await expect(this.page).toHaveTitle("Sign in with Apple ID");
 }
 
 async signUpWithFacebook(){
