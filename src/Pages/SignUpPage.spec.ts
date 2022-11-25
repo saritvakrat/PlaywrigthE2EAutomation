@@ -14,7 +14,7 @@ readonly facebookButtonLocator: Locator;
 constructor(page: Page) {
   this.page = page;
   this.emailAddressField = page.locator('.email');
-  this.myAccountText = page.getByText('My Account');
+  this.welcomeToYourAccountLocator = page.getByText('My Account');
   this.googleButtonLocator = page.getByRole('link', { name: 'google Google' });
   this.appleButtonLocator = page.getByRole('link', { name: 'apple Apple' });
   this.facebookButtonLocator = page.getByRole('link', { name: 'facebook Facebook' });
