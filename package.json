@@ -4,20 +4,25 @@
   "description": "playwright with typescript POM Example",
   "main": "index.js",
   "scripts": {
-    "test" : "playwright test",
-    "test:debug" : "playwright test --debug",
-    "test:desktop" : "playwright test --project=chromium",
-    "test:file" : "playwright test exampleFile",
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:desktop": "playwright test --project=chromium",
+    "test:file": "playwright test exampleFile",
     "test:trace": "playwright test --trace on",
-    "test:codegen" : "playwright codegen",
+    "test:codegen": "playwright codegen",
     "report": "playwright show-report",
     "test-headed": "playwright test landing-page.spec.ts --headed",
-    "show:trace": "playwright show-trace trace.zip"
+    "show:trace": "playwright show-trace trace.zip",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "Sarit Vakrat",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.28.0"
+    "@playwright/test": "^1.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.3"
   }
 }

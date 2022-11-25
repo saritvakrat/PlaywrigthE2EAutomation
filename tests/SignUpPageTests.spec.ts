@@ -66,7 +66,7 @@ test.describe('User Sign Up - Negative flows:', () => {
   test('should verify user cant sign up with the same email address', async ({ page }) => {
 
        const signUpPage = new SignUpPage(page);
-       let email = signUpUserData.email;
+       const email = signUpUserData.email;
        //Test
        await signUpPage.signUpWithEmail(email, signUpUserData.firstName, signUpUserData.lastName, signUpUserData.password, signUpUserData.dayOfBirth,  signUpUserData.monthOfBirth,  signUpUserData.yearOfBirth);
        
