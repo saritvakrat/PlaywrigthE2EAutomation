@@ -10,6 +10,7 @@ readonly welcomeToYourAccountLocator: Locator;
 readonly googleButtonLocator: Locator;
 readonly appleButtonLocator: Locator;
 readonly facebookButtonLocator: Locator;
+readonly invalidCredsErrorLocator : Locator;
 
 constructor(page: Page) {
   this.page = page;
@@ -18,10 +19,12 @@ constructor(page: Page) {
   this.googleButtonLocator = page.getByRole('link', { name: 'google Google' });
   this.appleButtonLocator = page.getByRole('link', { name: 'apple Apple' });
   this.facebookButtonLocator = page.getByRole('link', { name: 'facebook Facebook' });
+  this.invalidCredsErrorLocator = page.locator('.invalid');
 }
 
 welcomeToYourAccountText = 'WELCOME TO YOUR ACCOUNT';
-
+register_URL = 'https://my.asos.com/identity/register?lang=en-GB&store=ROW&country=IL&keyStoreDataversion=ornjx7v-36&returnUrl=https%3A%2F%2Fwww.asos.com%2F'
+invalidCredsErrorText = ""
 
 async goToSignUpPage() {
   // TODO: investigate why nav to URL does not work
@@ -40,6 +43,13 @@ async userIsLoggedIn() {
   await expect(this.welcomeToYourAccountLocator).toHaveText(this.welcomeToYourAccountText);
 }
 
+async logOut() {
+  const userloggedIn = true;
+
+  if (userloggedIn) {
+    await this.page.getByTestId('logout').click();
+  }
+}
 
 async signUpWithEmail(email: string, firstName: string, lastName: string, password: string, dayOfBirth: string, monthOfBirth: string, yearOfBirth: string ) {     
   //TODO: Extract to elements page in constructor 
@@ -48,6 +58,8 @@ async signUpWithEmail(email: string, firstName: string, lastName: string, passwo
   await this.page.getByLabel('First name').fill(firstName);
   await this.page.getByLabel('Last name').fill(lastName);
   await this.page.getByLabel('Password').fill(password);
+  await this.page.getByLabel('Password').scrollIntoViewIfNeeded();
+  await this.page.getByRole('combobox', { name: 'Date of birth Day' }).scrollIntoViewIfNeeded();
   await this.page.getByRole('combobox', { name: 'Date of birth Day' }).selectOption(dayOfBirth);
   await this.page.getByRole('combobox', { name: 'Date of birth Month' }).selectOption(monthOfBirth);
   await this.page.getByRole('combobox', { name: 'Date of birth Year' }).selectOption(yearOfBirth);
@@ -78,7 +90,7 @@ async errorValidations () {
 async signUpWithGoogle(){
   await this.googleButtonLocator.click();
   await expect(this.page).toHaveURL(/.*o/);
-  await expect(this.page).toHaveTitle("Sign in - Google Accounts");
+  await expect(this.page).toHaveTitle(/.*Google/);
 }
 
 async signUpWithApple(){

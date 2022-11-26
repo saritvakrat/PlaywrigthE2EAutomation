@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:sanity": "playwright test --grep @sanity",
+    "test:regression": "playwright test --grep @regression",
     "test:debug": "playwright test --debug",
     "test:desktop": "playwright test --project=chromium",
     "test:file": "playwright test exampleFile",
