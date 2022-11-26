@@ -13,6 +13,7 @@
     "test:trace": "playwright test --trace on",
     "test:codegen": "playwright codegen",
     "report": "playwright show-report",
+    "report:allure": "allure open allure-report && allure generate my-allure-results -o allure-report --clean",
     "test-headed": "playwright test landing-page.spec.ts --headed",
     "show:trace": "playwright show-trace trace.zip",
     "lint": "eslint ."
@@ -21,9 +22,10 @@
   "author": "Sarit Vakrat",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.28.0",
+    "@playwright/test": "^1.28.1",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
+    "allure-playwright": "^2.0.0-beta.20",
     "eslint": "^8.28.0",
     "typescript": "^4.9.3"
   }
