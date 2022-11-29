@@ -1,6 +1,7 @@
 import { test, expect} from '@playwright/test';
 import { SignUpPage } from '../src/Pages/SignUpPage.spec';
 import { signUpUserData } from '../src/testsData';
+import { allure, LabelName } from "allure-playwright";
 
 //TODO: Add parallel support
 test.beforeEach(async ({ page }) => {
@@ -22,6 +23,9 @@ test.afterAll(async ({ page }) => {
 test.describe('User Sign Up - Happy flows:', () =>  {
 
     test('@sanity should verify user can sign up with email', async  ({ page }, testInfo) => {
+      allure.link({ url: page.url(), name: "signup page" });
+      allure.id("JIRA-123");
+
       testInfo.annotations.push({ type: 'test_id', description: 'PROJ-1678' });
       const signUpPage = new SignUpPage(page);
       //Test
